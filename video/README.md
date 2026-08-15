@@ -8,13 +8,15 @@ A [Remotion](https://www.remotion.dev) project that animates what the skill does
 
 Each example takes a sentence carrying the tells listed in [`references/phrases.md`](../references/phrases.md), reddens the slop, strikes it through, then drops it while the surviving words slide together into the clean line.
 
-| Example | Rule | Before → after |
-|---|---|---|
-| 1 | Adverbs · Emphasis crutches | 9 → 4 words |
-| 2 | Throat-clearing openers | 10 → 4 words |
-| 3 | Vague declaratives · Meta-commentary | 14 → 4 words |
+| Example | Rule | Drawing | Before → after |
+|---|---|---|---|
+| 1 | Adverbs · Emphasis crutches | Stacked blocks | 9 → 4 words |
+| 2 | Throat-clearing openers | Four arrows | 10 → 4 words |
+| 3 | Vague declaratives · Meta-commentary | Paper plane | 14 → 4 words |
 
 Every example removes words and nothing else, so what the animation deletes is exactly what the skill deletes. The one exception is capitalisation: when a cut phrase sits at the start, the new first word carries an `afterText` so `teams` becomes `Teams`.
+
+Each sentence carries a line drawing of what it talks about, and the drawing is out of sorts while the sentence is: the top block sits askew, the arrows point four ways, the plane hangs still. They settle on the same beat the slop drops out, turning from grey to green as the line comes clean.
 
 ## What it looks like
 
@@ -28,9 +30,13 @@ Then struck through:
 
 ![Slop words struck through](preview/03-struck.jpg)
 
-Then dropped, leaving the clean line and a word count:
+Then dropped, leaving the clean line and a word count. The blocks straighten as it lands:
 
 ![The clean sentence](preview/04-clean.jpg)
+
+The second example does the same with arrows that start pointing four ways:
+
+![Four arrows aligned under the clean sentence](preview/05-arrows.jpg)
 
 ## Commands
 
@@ -62,6 +68,7 @@ src/StopSlop/
 ├── examples.ts    the three token lists
 ├── layout.ts      character-grid wrapping and centring
 ├── Sentence.tsx   per-word enter, redden, strike, collapse
+├── Glyph.tsx      the line drawings and how they settle
 ├── Scene.tsx      one example's timeline, label, counter
 ├── Intro.tsx      title card
 ├── Outro.tsx      end card
@@ -71,7 +78,7 @@ src/StopSlop/
 
 ## Adding an example
 
-Append to `examples` in `src/StopSlop/examples.ts`. Mark each word to remove with `cut()`; if removing a leading phrase changes the capitalisation of the new first word, give that token an `afterText`. The scene length and total duration follow from the list.
+Append to `examples` in `src/StopSlop/examples.ts`. Mark each word to remove with `cut()`; if removing a leading phrase changes the capitalisation of the new first word, give that token an `afterText`. Pick a `glyph` from the kinds in `Glyph.tsx`, or add one there — a glyph takes `draw` and `resolve` from 0 to 1 and draws itself with `pathLength`-normalised strokes. The scene length and total duration follow from the list.
 
 ## License
 
