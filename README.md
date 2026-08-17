@@ -8,6 +8,12 @@ A skill for removing AI tells from prose.
 
 AI writing has patterns. Predictable phrases, structures, rhythms. This skill teaches Claude (or any LLM) to catch and remove them.
 
+## Demo
+
+![A sentence with its slop struck through](video/preview/03-struck.jpg)
+
+The [`video/`](video) folder holds a Remotion project that animates three of these edits end to end. See [its README](video/README.md) for the rest of the frames and how to render it.
+
 ## Skill Structure
 
 ```
@@ -17,6 +23,7 @@ stop-slop/
 │   ├── phrases.md        # Phrases to remove
 │   ├── structures.md     # Structural patterns to avoid
 │   └── examples.md       # Before/after transformations
+├── video/                # Remotion demo animation
 ├── README.md
 └── LICENSE
 ```

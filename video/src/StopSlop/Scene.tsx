@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { Sentence } from "./Sentence";
+import { Glyph } from "./Glyph";
 import { theme, CHAR_RATIO } from "./theme";
 import type { Example } from "./examples";
 
@@ -33,6 +34,15 @@ export const Scene: React.FC<{ example: Example }> = ({ example }) => {
   });
 
   const labelIn = interpolate(frame, [4, 22], [0, 1], clampBoth);
+  const glyphDraw = interpolate(frame, [10, 46], [0, 1], {
+    ...clampBoth,
+    easing: Easing.out(Easing.quad),
+  });
+  // The drawing straightens itself on the same beat the slop drops out.
+  const glyphResolve = interpolate(frame, [96, 132], [0, 1], {
+    ...clampBoth,
+    ...ease,
+  });
   const counterIn = interpolate(frame, [130, 148], [0, 1], {
     ...clampBoth,
     easing: Easing.out(Easing.cubic),
@@ -79,6 +89,24 @@ export const Scene: React.FC<{ example: Example }> = ({ example }) => {
         }}
       >
         {example.label}
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          top: 218,
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          opacity: labelIn,
+        }}
+      >
+        <Glyph
+          kind={example.glyph}
+          draw={glyphDraw}
+          resolve={glyphResolve}
+          size={196}
+        />
       </div>
 
       <AbsoluteFill style={{ justifyContent: "center" }}>

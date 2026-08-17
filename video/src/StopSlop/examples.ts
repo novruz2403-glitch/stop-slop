@@ -1,3 +1,5 @@
+import type { GlyphKind } from "./Glyph";
+
 export type Token = {
   text: string;
   /** Marked for removal — reddened, struck through, then dropped. */
@@ -8,6 +10,8 @@ export type Token = {
 
 export type Example = {
   label: string;
+  /** Line drawing above the sentence, picked to match what it says. */
+  glyph: GlyphKind;
   tokens: Token[];
 };
 
@@ -21,6 +25,7 @@ const cut = (text: string): Token => ({ text, cut: true });
 export const examples: Example[] = [
   {
     label: "Adverbs · Emphasis crutches",
+    glyph: "blocks",
     tokens: [
       token("Building"),
       token("products"),
@@ -35,6 +40,7 @@ export const examples: Example[] = [
   },
   {
     label: "Throat-clearing openers",
+    glyph: "arrows",
     tokens: [
       cut("Here's"),
       cut("the"),
@@ -50,6 +56,7 @@ export const examples: Example[] = [
   },
   {
     label: "Vague declaratives · Meta-commentary",
+    glyph: "plane",
     tokens: [
       token("Ship"),
       token("the"),
